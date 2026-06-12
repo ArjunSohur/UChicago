@@ -1,0 +1,1163 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     46178,       1155]
+NotebookOptionsPosition[     42012,       1087]
+NotebookOutlinePosition[     42435,       1104]
+CellTagsIndexPosition[     42392,       1101]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ClearAll", "[", 
+   RowBox[{"JacobiMethod", ",", "GaussSeidelMethod"}], "]"}], ";"}]], "Input",\
+
+ CellChangeTimes->{{3.981057474789467*^9, 3.9810574770734053`*^9}},
+ CellLabel->
+  "In[129]:=",ExpressionUUID->"fce129ee-e690-428a-a1cb-dd52cd2a85ee"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{"1.", " ", "Jacobi", " ", "Method", " ", "Implementation"}], 
+   "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"JacobiMethod", "[", 
+     RowBox[{
+      RowBox[{"A_", "?", "MatrixQ"}], ",", 
+      RowBox[{"b_", "?", "VectorQ"}], ",", 
+      RowBox[{"x0_", "?", "VectorQ"}], ",", 
+      RowBox[{"tol_", "?", "NumericQ"}], ",", "maxIter_Integer", ",", 
+      RowBox[{"printSteps_", ":", "False"}]}], "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "DMat", ",", "Dinv", ",", "x", ",", "xNew", ",", "k", ",", "normDiff", 
+        ",", "normNew"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Extract", " ", "diagonal", " ", "matrix", " ", "and", " ", "compute", 
+        " ", "its", " ", "inverse"}], "*)"}], 
+      RowBox[{
+       RowBox[{"DMat", "=", 
+        RowBox[{"DiagonalMatrix", "[", 
+         RowBox[{"Diagonal", "[", "A", "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Dinv", "=", 
+        RowBox[{"Inverse", "[", "DMat", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"x", "=", 
+        RowBox[{"N", "[", "x0", "]"}]}], ";", 
+       RowBox[{"(*", 
+        RowBox[{"Ensure", " ", "numerical", " ", "evaluation"}], "*)"}], 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"k", "=", "1"}], ",", 
+         RowBox[{"k", "<=", "maxIter"}], ",", 
+         RowBox[{"k", "++"}], ",", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"Iteration", " ", 
+            RowBox[{"step", ":", "x_new"}]}], "=", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"D", "^", 
+              RowBox[{"(", 
+               RowBox[{"-", "1"}], ")"}]}], ".", 
+             RowBox[{"(", 
+              RowBox[{"D", "-", "A"}], ")"}], ".", "x"}], "+", 
+            RowBox[{
+             RowBox[{"D", "^", 
+              RowBox[{"(", 
+               RowBox[{"-", "1"}], ")"}]}], ".", "b"}]}]}], "*)"}], 
+         RowBox[{
+          RowBox[{"xNew", "=", 
+           RowBox[{
+            RowBox[{"Dinv", ".", 
+             RowBox[{"(", 
+              RowBox[{"DMat", "-", "A"}], ")"}], ".", "x"}], "+", 
+            RowBox[{"Dinv", ".", "b"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Optional", " ", "printing", " ", "of", " ", "intermediate", " ", 
+            "steps"}], "*)"}], 
+          RowBox[{"If", "[", 
+           RowBox[{"printSteps", ",", 
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<Iteration \>\"", ",", "k", ",", "\"\<: x = \>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"xNew", ",", 
+                RowBox[{"{", 
+                 RowBox[{"10", ",", "6"}], "}"}]}], "]"}], 
+              ",", "\"\<, Error = \>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"normDiff", ",", 
+                RowBox[{"{", 
+                 RowBox[{"10", ",", "6"}], "}"}]}], "]"}]}], "]"}]}], "]"}], ";",
+           "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Convergence", " ", "check", " ", "using", " ", "Infinity", " ", 
+            "norm"}], "*)"}], 
+          RowBox[{"normDiff", "=", 
+           RowBox[{"Norm", "[", 
+            RowBox[{
+             RowBox[{"xNew", "-", "x"}], ",", "Infinity"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"normNew", "=", 
+           RowBox[{"Norm", "[", 
+            RowBox[{"xNew", ",", "Infinity"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"normNew", ">", "0"}], "&&", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"normDiff", "/", "normNew"}], ")"}], "<", "tol"}]}], ",", 
+            RowBox[{
+             RowBox[{"Print", "[", 
+              
+              RowBox[{"\"\<Jacobi converged in \>\"", ",", "k", 
+               ",", "\"\< iterations.\>\""}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Return", "[", "xNew", "]"}], ";"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"x", "=", "xNew"}], ";"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Jacobi reached maximum iterations (\>\"", ",", "maxIter",
+          ",", "\"\<) without converging.\>\""}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "x", "]"}], ";"}]}], "]"}]}], "\n"}]}]], "Input",\
+
+ CellChangeTimes->{{3.98105749322278*^9, 3.981057493224708*^9}, 
+   3.981057863049472*^9, 
+   3.981106082344733*^9},ExpressionUUID->"3f136a7d-ef22-46d0-b2ff-\
+723798152726"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"2.", " ", "Gauss"}], "-", 
+    RowBox[{"Seidel", " ", "Method", " ", "Implementation"}]}], "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"GaussSeidelMethod", "[", 
+     RowBox[{
+      RowBox[{"A_", "?", "MatrixQ"}], ",", 
+      RowBox[{"b_", "?", "VectorQ"}], ",", 
+      RowBox[{"x0_", "?", "VectorQ"}], ",", 
+      RowBox[{"tol_", "?", "NumericQ"}], ",", "maxIter_Integer", ",", 
+      RowBox[{"printSteps_", ":", "False"}]}], "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "LMat", ",", "UMat", ",", "DMat", ",", "LDinv", ",", "x", ",", "xNew", 
+        ",", "k", ",", "normDiff", ",", "normNew"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{"Extract", " ", "strictly", " ", "lower"}], ",", 
+        RowBox[{"strictly", " ", "upper"}], ",", 
+        RowBox[{"and", " ", "diagonal", " ", "components"}]}], "*)"}], 
+      RowBox[{
+       RowBox[{"LMat", "=", 
+        RowBox[{"LowerTriangularize", "[", 
+         RowBox[{"A", ",", 
+          RowBox[{"-", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"UMat", "=", 
+        RowBox[{"UpperTriangularize", "[", 
+         RowBox[{"A", ",", "1"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"DMat", "=", 
+        RowBox[{"DiagonalMatrix", "[", 
+         RowBox[{"Diagonal", "[", "A", "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"Precompute", " ", 
+         RowBox[{"Inverse", "[", 
+          RowBox[{"L", "+", "D"}], "]"}]}], "*)"}], 
+       RowBox[{"LDinv", "=", 
+        RowBox[{"Inverse", "[", 
+         RowBox[{"LMat", "+", "DMat"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"x", "=", 
+        RowBox[{"N", "[", "x0", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"For", "[", 
+        RowBox[{
+         RowBox[{"k", "=", "1"}], ",", 
+         RowBox[{"k", "<=", "maxIter"}], ",", 
+         RowBox[{"k", "++"}], ",", 
+         RowBox[{"(*", 
+          RowBox[{
+           RowBox[{"Iteration", " ", 
+            RowBox[{"step", ":", "x_new"}]}], "=", 
+           RowBox[{
+            RowBox[{"-", 
+             RowBox[{
+              RowBox[{"Inverse", "[", 
+               RowBox[{"L", "+", "D"}], "]"}], ".", "U", ".", "x"}]}], "+", 
+            RowBox[{
+             RowBox[{"Inverse", "[", 
+              RowBox[{"L", "+", "D"}], "]"}], ".", "b"}]}]}], "*)"}], 
+         RowBox[{
+          RowBox[{"xNew", "=", 
+           RowBox[{
+            RowBox[{"-", 
+             RowBox[{"LDinv", ".", "UMat", ".", "x"}]}], "+", 
+            RowBox[{"LDinv", ".", "b"}]}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{"printSteps", ",", 
+            RowBox[{"Print", "[", 
+             RowBox[{"\"\<Iteration \>\"", ",", "k", ",", "\"\<: x = \>\"", ",", 
+              RowBox[{"NumberForm", "[", 
+               RowBox[{"xNew", ",", 
+                RowBox[{"{", 
+                 RowBox[{"10", ",", "6"}], "}"}]}], "]"}]}], "]"}]}], "]"}], ";",
+           "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+           "Convergence", " ", "check", " ", "using", " ", "Infinity", " ", 
+            "norm"}], "*)"}], 
+          RowBox[{"normDiff", "=", 
+           RowBox[{"Norm", "[", 
+            RowBox[{
+             RowBox[{"xNew", "-", "x"}], ",", "Infinity"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"normNew", "=", 
+           RowBox[{"Norm", "[", 
+            RowBox[{"xNew", ",", "Infinity"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"normNew", ">", "0"}], "&&", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"normDiff", "/", "normNew"}], ")"}], "<", "tol"}]}], ",", 
+            RowBox[{
+             RowBox[{"Print", "[", 
+              
+              RowBox[{"\"\<Gauss-Seidel converged in \>\"", ",", "k", 
+               ",", "\"\< iterations.\>\""}], "]"}], ";", 
+             "\[IndentingNewLine]", 
+             RowBox[{"Return", "[", "xNew", "]"}], ";"}]}], "]"}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"x", "=", "xNew"}], ";"}]}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Gauss-Seidel reached maximum iterations (\>\"", ",", 
+         "maxIter", ",", "\"\<) without converging.\>\""}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "x", "]"}], ";"}]}], "]"}]}], "\n"}]}]], "Input",\
+
+ CellChangeTimes->{{3.981057613920808*^9, 3.981057613923067*^9}, 
+   3.981106099612471*^9},ExpressionUUID->"10b251cd-7b5a-43fd-a289-\
+fc425d06533b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"3.", " ", "In"}], "-", 
+    RowBox[{"Class", " ", "Experiment", " ", "Demonstrations"}]}], "*)"}], 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "===", "===", "===", "===", "===", "===", "===", "===", "===", "===", "===",
+     "==="}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- EXERCISE 1 DEMONSTRATION ---\>\"", "]"}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"A1", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"3", ",", "1", ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", "0"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"0", ",", "0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"b1", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "5", ",", 
+       RowBox[{"-", "5"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"x0", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"x0", "=", 
+      RowBox[{"{", 
+       RowBox[{"23", ",", 
+        RowBox[{"-", "13"}], ",", "11"}], "}"}]}], ";"}], "*)"}], "\n", "\n", 
+   
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Running Jacobi:\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"sol1J", "=", 
+     RowBox[{"JacobiMethod", "[", 
+      RowBox[{"A1", ",", "b1", ",", "x0", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "10"}]}], ",", "100", ",", "False"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Solution: \>\"", ",", "sol1J"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Norm of error in final solution: \>\"", " ", ",", " ", 
+     RowBox[{"Norm", "[", 
+      RowBox[{
+       RowBox[{"A1", ".", " ", "sol1J"}], " ", "-", " ", "b1"}], "]"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.981057650654764*^9, 3.9810576661372423`*^9}, {
+  3.9810578361618834`*^9, 3.981057836787005*^9}, {3.981057950071349*^9, 
+  3.98105803891728*^9}, {3.9810580965359583`*^9, 3.9810581156451273`*^9}, {
+  3.9810582410354137`*^9, 3.981058241436141*^9}, {3.981058894431575*^9, 
+  3.981058961055193*^9}, {3.9810590413226557`*^9, 3.981059053665387*^9}, {
+  3.981106133548851*^9, 3.981106168220055*^9}},
+ CellLabel->
+  "In[791]:=",ExpressionUUID->"a477b544-1b0f-4031-81cc-20414709ed19"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"\\n--- EXERCISE 1 DEMONSTRATION ---\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927062798`*^9, {3.9810578374413567`*^9, 3.981057867252882*^9}, {
+   3.981057961992605*^9, 3.9810579778094597`*^9}, {3.9810580101599817`*^9, 
+   3.981058041069016*^9}, 3.9810581631556377`*^9, 3.981058245701962*^9, {
+   3.981058902420907*^9, 3.981058962019711*^9}, {3.981059042800805*^9, 
+   3.9810590587400017`*^9}, 3.981106168901245*^9},
+ CellLabel->
+  "During evaluation of \
+In[791]:=",ExpressionUUID->"07c3567a-ecbf-4461-addd-edfb7030e016"],
+
+Cell[BoxData["\<\"Running Jacobi:\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927062798`*^9, {3.9810578374413567`*^9, 3.981057867252882*^9}, {
+   3.981057961992605*^9, 3.9810579778094597`*^9}, {3.9810580101599817`*^9, 
+   3.981058041069016*^9}, 3.9810581631556377`*^9, 3.981058245701962*^9, {
+   3.981058902420907*^9, 3.981058962019711*^9}, {3.981059042800805*^9, 
+   3.9810590587400017`*^9}, 3.9811061689022408`*^9},
+ CellLabel->
+  "During evaluation of \
+In[791]:=",ExpressionUUID->"f7c2cbe2-0a0d-4667-8022-68ef42d127b5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi converged in \"\>", "\[InvisibleSpace]", "28", 
+   "\[InvisibleSpace]", "\<\" iterations.\"\>"}],
+  SequenceForm["Jacobi converged in ", 28, " iterations."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927062798`*^9, {3.9810578374413567`*^9, 3.981057867252882*^9}, {
+   3.981057961992605*^9, 3.9810579778094597`*^9}, {3.9810580101599817`*^9, 
+   3.981058041069016*^9}, 3.9810581631556377`*^9, 3.981058245701962*^9, {
+   3.981058902420907*^9, 3.981058962019711*^9}, {3.981059042800805*^9, 
+   3.9810590587400017`*^9}, 3.9811061689062366`*^9},
+ CellLabel->
+  "During evaluation of \
+In[791]:=",ExpressionUUID->"e42b5b6e-8450-4836-972b-fd9bf519c27f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "2.999999999961717`"}], ",", "3.9999999998851514`", ",", 
+     RowBox[{"-", "5.`"}]}], "}"}]}],
+  SequenceForm["Solution: ", {-2.999999999961717, 3.9999999998851514`, -5.}],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927062798`*^9, {3.9810578374413567`*^9, 3.981057867252882*^9}, {
+   3.981057961992605*^9, 3.9810579778094597`*^9}, {3.9810580101599817`*^9, 
+   3.981058041069016*^9}, 3.9810581631556377`*^9, 3.981058245701962*^9, {
+   3.981058902420907*^9, 3.981058962019711*^9}, {3.981059042800805*^9, 
+   3.9810590587400017`*^9}, 3.981106168907139*^9},
+ CellLabel->
+  "During evaluation of \
+In[791]:=",ExpressionUUID->"a52bcb53-fd76-4204-ba00-8a3595482d96"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Norm of error in final solution: \"\>", "\[InvisibleSpace]", 
+   "1.914139957648331`*^-10"}],
+  SequenceForm["Norm of error in final solution: ", 1.914139957648331*^-10],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927062798`*^9, {3.9810578374413567`*^9, 3.981057867252882*^9}, {
+   3.981057961992605*^9, 3.9810579778094597`*^9}, {3.9810580101599817`*^9, 
+   3.981058041069016*^9}, 3.9810581631556377`*^9, 3.981058245701962*^9, {
+   3.981058902420907*^9, 3.981058962019711*^9}, {3.981059042800805*^9, 
+   3.9810590587400017`*^9}, 3.9811061689077806`*^9},
+ CellLabel->
+  "During evaluation of \
+In[791]:=",ExpressionUUID->"9fae3775-46df-41ea-8eda-5c44505df59b"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- EXERCISE 2 DEMONSTRATION ---\>\"", "]"}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"A2", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", "1", ",", "2"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"6", ",", 
+         RowBox[{"-", "1"}], ",", "5"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"68.5", ",", 
+         RowBox[{"-", "28.5"}], ",", 
+         RowBox[{"-", "1"}]}], "}"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"b2", "=", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0", ",", 
+       RowBox[{"-", "20.5"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"x0", "=", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "2", ",", "0"}], "}"}]}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Running Jacobi:\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"sol2J", "=", 
+     RowBox[{"JacobiMethod", "[", 
+      RowBox[{"A2", ",", "b2", ",", "x0", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "10"}]}], ",", "100", ",", "False"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Solution: \>\"", ",", "sol2J"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Norm of error in final solution: \>\"", " ", ",", " ", 
+     RowBox[{"Norm", "[", 
+      RowBox[{
+       RowBox[{"A2", ".", " ", "sol2J"}], " ", "-", " ", "b2"}], "]"}]}], 
+    "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<\\nRunning Gauss-Seidel:\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"sol2GS", "=", 
+     RowBox[{"GaussSeidelMethod", "[", 
+      RowBox[{"A2", ",", "b2", ",", "x0", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "10"}]}], ",", "100", ",", "False"}], "]"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Solution: \>\"", ",", "sol2GS"}], "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Norm of error in final solution: \>\"", " ", ",", " ", 
+     RowBox[{"Norm", "[", 
+      RowBox[{
+       RowBox[{"A2", ".", " ", "sol2GS"}], " ", "-", " ", "b2"}], "]"}]}], 
+    "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{
+  3.981057674681588*^9, {3.9810580443847313`*^9, 3.981058154116817*^9}, {
+   3.9810581919494677`*^9, 3.981058211686414*^9}, {3.981058250333234*^9, 
+   3.981058283813114*^9}, {3.981058405803543*^9, 3.98105852947537*^9}, {
+   3.981058566403911*^9, 3.9810586982381153`*^9}, {3.981058848609407*^9, 
+   3.9810588569247513`*^9}, {3.98105896617001*^9, 3.9810589896777277`*^9}, {
+   3.981059038862235*^9, 3.981059056899724*^9}, {3.981106182759836*^9, 
+   3.9811062155592613`*^9}},
+ CellLabel->
+  "In[811]:=",ExpressionUUID->"cb8c5d10-df57-4504-8346-6fe48c6bc989"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"\\n--- EXERCISE 2 DEMONSTRATION ---\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.981106215875684*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"70ba70b9-02d7-4abe-b0de-bfc9230838e6"],
+
+Cell[BoxData["\<\"Running Jacobi:\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.9811062158763857`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"34f9a59d-0bce-4042-a469-7921c3d64071"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi converged in \"\>", "\[InvisibleSpace]", "69", 
+   "\[InvisibleSpace]", "\<\" iterations.\"\>"}],
+  SequenceForm["Jacobi converged in ", 69, " iterations."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.9811062158773003`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"a6658135-a275-4662-b202-0b59a90d3c79"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{"200.4000000116066`", ",", "487.40000002697343`", ",", 
+     RowBox[{"-", "143.00000002214801`"}]}], "}"}]}],
+  SequenceForm[
+  "Solution: ", {200.4000000116066, 
+   487.40000002697343`, -143.00000002214801`}],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.981106215877791*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"1dc5feb4-51f3-4e62-ad02-f413e7b18ce8"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Norm of error in final solution: \"\>", "\[InvisibleSpace]", 
+   "8.842576149573632`*^-8"}],
+  SequenceForm["Norm of error in final solution: ", 8.842576149573632*^-8],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.9811062158782663`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"8062b478-2c7a-46bb-89c1-d1b6b2a9f295"],
+
+Cell[BoxData["\<\"\\nRunning Gauss-Seidel:\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.981106215878755*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"17d4755b-909b-41f9-ae8d-1832cfb228c6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Gauss-Seidel reached maximum iterations (\"\>", "\[InvisibleSpace]",
+    "100", "\[InvisibleSpace]", "\<\") without converging.\"\>"}],
+  SequenceForm[
+  "Gauss-Seidel reached maximum iterations (", 100, ") without converging."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.9811062158792257`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"13596287-786f-470b-872f-4637faf4d0ae"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"-", "3.977317382672996`*^250"}], ",", 
+     RowBox[{"-", "3.4055780089137535`*^251"}], ",", 
+     "6.981434918273193`*^252"}], "}"}]}],
+  SequenceForm[
+  "Solution: ", {-3.977317382672996*^250, -3.4055780089137535`*^251, 
+   6.981434918273193*^252}],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.981106215879717*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"abcef611-371b-44f6-8c55-90ff8780bdfe"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Norm of error in final solution: \"\>", "\[InvisibleSpace]", 
+   "3.758043625892239`*^253"}],
+  SequenceForm["Norm of error in final solution: ", 3.758043625892239*^253],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927124767`*^9, {3.981058049383082*^9, 3.981058072304742*^9}, 
+   3.981058155984146*^9, {3.9810582072138853`*^9, 3.981058212096924*^9}, {
+   3.981058251138489*^9, 3.981058284486521*^9}, 3.9810583955574923`*^9, {
+   3.98105843912154*^9, 3.981058607289584*^9}, {3.981058653968027*^9, 
+   3.981058699355714*^9}, 3.981058857901787*^9, {3.981058968882224*^9, 
+   3.981058990064268*^9}, {3.981059045365484*^9, 3.9810590621072483`*^9}, {
+   3.981106191963661*^9, 3.981106215880199*^9}},
+ CellLabel->
+  "During evaluation of \
+In[811]:=",ExpressionUUID->"f6ea02ed-454f-4f6d-bbbb-e7aab2997ba1"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- EXERCISE 3 DEMONSTRATION ---\>\"", "]"}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"A3", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"1", ",", "2", ",", 
+         RowBox[{"-", "1"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "1", ",", "1"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"-", "1"}], ",", "0", ",", "1"}], "}"}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"b3", "=", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "0", ",", "3"}], "}"}]}], ";"}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<Running Jacobi:\>\"", "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"sol3J", "=", 
+     RowBox[{"JacobiMethod", "[", 
+      RowBox[{"A3", ",", "b3", ",", "x0", ",", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "10"}]}], ",", "50", ",", "False"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\<Norm of error in final solution: \>\"", " ", ",", " ", 
+     RowBox[{"Norm", "[", 
+      RowBox[{
+       RowBox[{"A3", ".", " ", "sol3J"}], " ", "-", " ", "b3"}], "]"}]}], 
+    "]"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"sol3J", "=", 
+      RowBox[{"JacobiMethod", "[", 
+       RowBox[{"A3", ",", "b3", ",", "x0", ",", 
+        RowBox[{"10", "^", 
+         RowBox[{"-", "10"}]}], ",", "5", ",", "True"}], "]"}]}], ";"}], 
+    "*)"}], "\n"}]}]], "Input",
+ CellChangeTimes->{
+  3.9810576812723417`*^9, {3.981059073129775*^9, 3.981059136436466*^9}, {
+   3.981106238404203*^9, 3.981106244428104*^9}},
+ CellLabel->
+  "In[828]:=",ExpressionUUID->"5cc774a3-2933-45c6-bf26-a6c7bdb9451f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"\\n--- EXERCISE 3 DEMONSTRATION ---\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927301197`*^9, {3.981059079633931*^9, 3.981059098645575*^9}, 
+   3.981059137580978*^9, {3.98110622859186*^9, 3.981106244817086*^9}},
+ CellLabel->
+  "During evaluation of \
+In[828]:=",ExpressionUUID->"ecd30a69-2f76-4644-8074-7e9e91b495e0"],
+
+Cell[BoxData["\<\"Running Jacobi:\"\>"], "Print",
+ CellChangeTimes->{
+  3.9810576927301197`*^9, {3.981059079633931*^9, 3.981059098645575*^9}, 
+   3.981059137580978*^9, {3.98110622859186*^9, 3.981106244817718*^9}},
+ CellLabel->
+  "During evaluation of \
+In[828]:=",ExpressionUUID->"19c60e15-3b1f-461f-b0d5-b0151374e022"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi reached maximum iterations (\"\>", "\[InvisibleSpace]", 
+   "50", "\[InvisibleSpace]", "\<\") without converging.\"\>"}],
+  SequenceForm[
+  "Jacobi reached maximum iterations (", 50, ") without converging."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927301197`*^9, {3.981059079633931*^9, 3.981059098645575*^9}, 
+   3.981059137580978*^9, {3.98110622859186*^9, 3.98110624481833*^9}},
+ CellLabel->
+  "During evaluation of \
+In[828]:=",ExpressionUUID->"6204afc8-ec1e-450b-89ec-3fafce8880f5"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Norm of error in final solution: \"\>", "\[InvisibleSpace]", 
+   "8.13023491297459`*^19"}],
+  SequenceForm["Norm of error in final solution: ", 8.13023491297459*^19],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.9810576927301197`*^9, {3.981059079633931*^9, 3.981059098645575*^9}, 
+   3.981059137580978*^9, {3.98110622859186*^9, 3.98110624481879*^9}},
+ CellLabel->
+  "During evaluation of \
+In[828]:=",ExpressionUUID->"402f498c-48b0-48f6-93ef-1d13f4c23b33"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+    "Print", "[", "\"\<\\n--- EXERCISE 4 DEMONSTRATION ---\>\"", "]"}], ";"}],
+    "\n", 
+   RowBox[{
+    RowBox[{"gammaValues", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"2", "^", 
+        RowBox[{"-", "2"}]}], ",", 
+       RowBox[{"2", "^", 
+        RowBox[{"-", "4"}]}], ",", 
+       RowBox[{"2", "^", 
+        RowBox[{"-", "6"}]}], ",", 
+       RowBox[{"2", "^", 
+        RowBox[{"-", "8"}]}]}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"x0Ex4", "=", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0"}], "}"}]}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"maxIterEx4", " ", "=", " ", "10000"}], ";"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"For", "[", 
+     RowBox[{
+      RowBox[{"i", "=", "1"}], ",", 
+      RowBox[{"i", "<=", 
+       RowBox[{"Length", "[", "gammaValues", "]"}]}], ",", 
+      RowBox[{"i", "++"}], ",", 
+      RowBox[{
+       RowBox[{"gammaVal", "=", 
+        RowBox[{"gammaValues", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<\\nTesting gamma = \>\"", ",", " ", "gammaVal"}], "]"}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"A4", "=", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"1", ",", 
+            RowBox[{"gammaVal", "-", "1"}]}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"gammaVal", "-", "1"}], ",", "1"}], "}"}]}], "}"}]}], ";",
+        "\[IndentingNewLine]", 
+       RowBox[{"b4", "=", 
+        RowBox[{"{", 
+         RowBox[{"gammaVal", ",", "gammaVal"}], "}"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"sol4J", "=", 
+        RowBox[{"JacobiMethod", "[", 
+         RowBox[{"A4", ",", "b4", ",", "x0Ex4", ",", 
+          RowBox[{"10", "^", 
+           RowBox[{"-", "10"}]}], ",", "maxIterEx4", ",", "False"}], "]"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"\"\<Solution: \>\"", ",", 
+         RowBox[{"NumberForm", "[", 
+          RowBox[{"sol4J", ",", 
+           RowBox[{"{", 
+            RowBox[{"10", ",", "6"}], "}"}]}], "]"}]}], "]"}], ";"}]}], "]"}],
+     ";"}]}]}]], "Input",
+ CellChangeTimes->{{3.9810591460183353`*^9, 3.9810591504923353`*^9}, {
+  3.981059182140275*^9, 3.98105937102315*^9}, {3.9810594034796677`*^9, 
+  3.981059467903743*^9}},
+ CellLabel->
+  "In[784]:=",ExpressionUUID->"e1c05233-567f-4ffe-9fd5-9556a5b4528b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"\\n--- EXERCISE 4 DEMONSTRATION ---\"\>"], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.9810594683929157`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"cd6a4853-3887-489d-a736-eaa8500fa04c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nTesting gamma = \"\>", "\[InvisibleSpace]", 
+   FractionBox["1", "4"]}],
+  SequenceForm["\nTesting gamma = ", 
+   Rational[1, 4]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468393593*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"17dde6d3-a522-4c2f-a2eb-fe30ef7277d4"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi converged in \"\>", "\[InvisibleSpace]", "77", 
+   "\[InvisibleSpace]", "\<\" iterations.\"\>"}],
+  SequenceForm["Jacobi converged in ", 77, " iterations."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.9810594683942432`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"33f1ce98-8285-4987-a1ca-c710630e670a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999997602729,
+       AutoDelete->True], ",", 
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999997602729,
+       AutoDelete->True]}], "}"}],
+    NumberForm[#, {10, 6}]& ]}],
+  SequenceForm["Solution: ", 
+   NumberForm[{0.9999999997602729, 0.9999999997602729}, {10, 6}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468394746*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"eea191e3-b915-4f3d-b46d-a86d2050109b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nTesting gamma = \"\>", "\[InvisibleSpace]", 
+   FractionBox["1", "16"]}],
+  SequenceForm["\nTesting gamma = ", 
+   Rational[1, 16]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.9810594683952208`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"7e9dd73a-a552-4e9f-bc48-7697bde3780d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi converged in \"\>", "\[InvisibleSpace]", "315", 
+   "\[InvisibleSpace]", "\<\" iterations.\"\>"}],
+  SequenceForm["Jacobi converged in ", 315, " iterations."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468415114*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"1b7b7a7e-2ade-467e-b45f-70c3a183df6d"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999985176455,
+       AutoDelete->True], ",", 
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999985176455,
+       AutoDelete->True]}], "}"}],
+    NumberForm[#, {10, 6}]& ]}],
+  SequenceForm["Solution: ", 
+   NumberForm[{0.9999999985176455, 0.9999999985176455}, {10, 6}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468416339*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"64931e7b-356e-4cda-b802-8d5cd2915ec1"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nTesting gamma = \"\>", "\[InvisibleSpace]", 
+   FractionBox["1", "64"]}],
+  SequenceForm["\nTesting gamma = ", 
+   Rational[1, 64]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468416851*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"00178343-1aff-49de-bdec-5ccadd72cc99"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi converged in \"\>", "\[InvisibleSpace]", "1200", 
+   "\[InvisibleSpace]", "\<\" iterations.\"\>"}],
+  SequenceForm["Jacobi converged in ", 1200, " iterations."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468452304*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"f353ec6c-7724-4469-b5c8-d21938480e64"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999937957317,
+       AutoDelete->True], ",", 
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999937957317,
+       AutoDelete->True]}], "}"}],
+    NumberForm[#, {10, 6}]& ]}],
+  SequenceForm["Solution: ", 
+   NumberForm[{0.9999999937957317, 0.9999999937957317}, {10, 6}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.9810594684535646`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"33484f84-5537-49d3-8198-7d557b618929"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"\\nTesting gamma = \"\>", "\[InvisibleSpace]", 
+   FractionBox["1", "256"]}],
+  SequenceForm["\nTesting gamma = ", 
+   Rational[1, 256]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468454054*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"149ddbe3-3b75-4ab7-9d63-24bc7c02501b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Jacobi converged in \"\>", "\[InvisibleSpace]", "4468", 
+   "\[InvisibleSpace]", "\<\" iterations.\"\>"}],
+  SequenceForm["Jacobi converged in ", 4468, " iterations."],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468669251*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"44117c9e-13ec-4ebe-a88c-c5c67c83727b"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Solution: \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"{", 
+     RowBox[{
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999745691336,
+       AutoDelete->True], ",", 
+      InterpretationBox[
+       StyleBox["\<\"1.000000\"\>",
+        ShowStringCharacters->False],
+       0.9999999745691336,
+       AutoDelete->True]}], "}"}],
+    NumberForm[#, {10, 6}]& ]}],
+  SequenceForm["Solution: ", 
+   NumberForm[{0.9999999745691336, 0.9999999745691336}, {10, 6}]],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.981057692737893*^9, 3.981059151057949*^9, {3.981059280753214*^9, 
+   3.981059371433638*^9}, {3.981059404146131*^9, 3.981059468670527*^9}},
+ CellLabel->
+  "During evaluation of \
+In[784]:=",ExpressionUUID->"b5333301-7a76-477a-88dc-b15567e72bad"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{2240, 1126},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"14.3 for Mac OS X ARM (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"31c193a3-3131-4ea2-8ff6-8977fb4cdc2e"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 283, 7, 36, "Input",ExpressionUUID->"fce129ee-e690-428a-a1cb-dd52cd2a85ee"],
+Cell[840, 29, 5149, 130, 368, "Input",ExpressionUUID->"3f136a7d-ef22-46d0-b2ff-723798152726"],
+Cell[5992, 161, 5201, 128, 445, "Input",ExpressionUUID->"10b251cd-7b5a-43fd-a289-fc425d06533b"],
+Cell[CellGroupData[{
+Cell[11218, 293, 2725, 73, 292, "Input",ExpressionUUID->"a477b544-1b0f-4031-81cc-20414709ed19"],
+Cell[CellGroupData[{
+Cell[13968, 370, 544, 9, 52, "Print",ExpressionUUID->"07c3567a-ecbf-4461-addd-edfb7030e016"],
+Cell[14515, 381, 526, 9, 28, "Print",ExpressionUUID->"f7c2cbe2-0a0d-4667-8022-68ef42d127b5"],
+Cell[15044, 392, 720, 14, 28, "Print",ExpressionUUID->"e42b5b6e-8450-4836-972b-fd9bf519c27f"],
+Cell[15767, 408, 814, 17, 28, "Print",ExpressionUUID->"a52bcb53-fd76-4204-ba00-8a3595482d96"],
+Cell[16584, 427, 726, 14, 28, "Print",ExpressionUUID->"9fae3775-46df-41ea-8eda-5c44505df59b"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17359, 447, 2946, 73, 445, "Input",ExpressionUUID->"cb8c5d10-df57-4504-8346-6fe48c6bc989"],
+Cell[CellGroupData[{
+Cell[20330, 524, 685, 11, 52, "Print",ExpressionUUID->"70ba70b9-02d7-4abe-b0de-bfc9230838e6"],
+Cell[21018, 537, 667, 11, 28, "Print",ExpressionUUID->"34f9a59d-0bce-4042-a469-7921c3d64071"],
+Cell[21688, 550, 861, 16, 28, "Print",ExpressionUUID->"a6658135-a275-4662-b202-0b59a90d3c79"],
+Cell[22552, 568, 973, 20, 28, "Print",ExpressionUUID->"1dc5feb4-51f3-4e62-ad02-f413e7b18ce8"],
+Cell[23528, 590, 865, 16, 28, "Print",ExpressionUUID->"8062b478-2c7a-46bb-89c1-d1b6b2a9f295"],
+Cell[24396, 608, 674, 11, 52, "Print",ExpressionUUID->"17d4755b-909b-41f9-ae8d-1832cfb228c6"],
+Cell[25073, 621, 926, 17, 28, "Print",ExpressionUUID->"13596287-786f-470b-872f-4637faf4d0ae"],
+Cell[26002, 640, 1028, 22, 31, "Print",ExpressionUUID->"abcef611-371b-44f6-8c55-90ff8780bdfe"],
+Cell[27033, 664, 865, 16, 28, "Print",ExpressionUUID->"f6ea02ed-454f-4f6d-bbbb-e7aab2997ba1"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27947, 686, 1799, 50, 292, "Input",ExpressionUUID->"5cc774a3-2933-45c6-bf26-a6c7bdb9451f"],
+Cell[CellGroupData[{
+Cell[29771, 740, 339, 6, 52, "Print",ExpressionUUID->"ecd30a69-2f76-4644-8074-7e9e91b495e0"],
+Cell[30113, 748, 319, 6, 28, "Print",ExpressionUUID->"19c60e15-3b1f-461f-b0d5-b0151374e022"],
+Cell[30435, 756, 563, 12, 28, "Print",ExpressionUUID->"6204afc8-ec1e-450b-89ec-3fafce8880f5"],
+Cell[31001, 770, 514, 11, 28, "Print",ExpressionUUID->"402f498c-48b0-48f6-93ef-1d13f4c23b33"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31564, 787, 2511, 70, 317, "Input",ExpressionUUID->"e1c05233-567f-4ffe-9fd5-9556a5b4528b"],
+Cell[CellGroupData[{
+Cell[34100, 861, 340, 6, 52, "Print",ExpressionUUID->"cd6a4853-3887-489d-a736-eaa8500fa04c"],
+Cell[34443, 869, 481, 12, 68, "Print",ExpressionUUID->"17dde6d3-a522-4c2f-a2eb-fe30ef7277d4"],
+Cell[34927, 883, 514, 11, 28, "Print",ExpressionUUID->"33f1ce98-8285-4987-a1ca-c710630e670a"],
+Cell[35444, 896, 878, 25, 28, "Print",ExpressionUUID->"eea191e3-b915-4f3d-b46d-a86d2050109b"],
+Cell[36325, 923, 485, 12, 68, "Print",ExpressionUUID->"7e9dd73a-a552-4e9f-bc48-7697bde3780d"],
+Cell[36813, 937, 514, 11, 28, "Print",ExpressionUUID->"1b7b7a7e-2ade-467e-b45f-70c3a183df6d"],
+Cell[37330, 950, 878, 25, 28, "Print",ExpressionUUID->"64931e7b-356e-4cda-b802-8d5cd2915ec1"],
+Cell[38211, 977, 483, 12, 68, "Print",ExpressionUUID->"00178343-1aff-49de-bdec-5ccadd72cc99"],
+Cell[38697, 991, 516, 11, 28, "Print",ExpressionUUID->"f353ec6c-7724-4469-b5c8-d21938480e64"],
+Cell[39216, 1004, 880, 25, 28, "Print",ExpressionUUID->"33484f84-5537-49d3-8198-7d557b618929"],
+Cell[40099, 1031, 485, 12, 68, "Print",ExpressionUUID->"149ddbe3-3b75-4ab7-9d63-24bc7c02501b"],
+Cell[40587, 1045, 516, 11, 28, "Print",ExpressionUUID->"44117c9e-13ec-4ebe-a88c-c5c67c83727b"],
+Cell[41106, 1058, 878, 25, 28, "Print",ExpressionUUID->"b5333301-7a76-477a-88dc-b15567e72bad"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

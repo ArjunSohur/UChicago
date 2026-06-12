@@ -1,0 +1,229 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+% Edit these as appropriate
+\newcommand\course{CSE 3500}
+\newcommand\hwnumber{1}                  % <-- homework number
+\newcommand\NetIDa{netid19823}           % <-- NetID of person #1
+\newcommand\NetIDb{netid12038}           % <-- NetID of person #2 (Comment this line out for problem sets)
+
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{MATH 20250, Prof. Lanier, Midterm}
+                % <-- Comment this line out for problem sets (make sure you are person #1)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\chead{\textbf{Name:}}
+\rhead{}
+
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep .5em
+\begin{document}
+There are 100 points in the exam, over 9 numbered problems, some with multiple parts.\\
+The total number of points for each problem is indicated.\\
+Each part of a problem is worth the same amount.\\
+There is also a bonus.
+
+
+\vskip.1in
+\hrule
+\vskip.1in
+
+1. (16 points) Give an example of each of the following, or explain why it is not possible.
+
+\vskip.11in
+
+a) Two non-square matrices that are row equivalent but not column equivalent.
+
+\vskip1.5in
+
+b) A real matrix with nullspace equal to $\text{span}\Big(\Big\{\begin{pmatrix} 
+2\\3\\4\end{pmatrix}\Big\}\Big)$ and column space equal to $\text{span}\Big(\Big\{\begin{pmatrix} 
+-1\\0\\2\end{pmatrix}\Big\}\Big)$ 
+\vskip1.5in
+
+c) A real invertible matrix $A$ such that $\det(A^2)=10\det(A)$
+\vskip1.5in
+
+d) Two distinct subspaces $U,V$ of $\mathbb{R}^4$ so that their intersection is a subspace of dimension 3.
+
+
+
+
+\newpage
+\vskip.5in
+2. (8 points) 
+
+\vskip.1in
+
+a) Give a precise definition for the following linear algebra term.
+\vskip.15in
+
+{\bf basis:}
+
+\vskip3in
+
+b) State the three defining properties of a determinant function and illustrate one of them with an example.
+
+
+
+
+
+
+\newpage
+
+3. (10 points) Complete the following:
+
+\vskip.15in
+
+a) State the Rank Theorem. Give an example that illustrates it.
+
+
+\vskip3.5in
+
+b) Give four examples of conditions that are equivalent to the following: the columns of an $n \times n$ matrix $A$ are linearly independent.
+
+
+
+\newpage
+
+\vskip.3in
+
+4. (12 points) Prove \textbf{one} of the following:
+
+a) A square matrix $A$ is idempotent if it has the property that $A^2=A$. What are the possible values of the determinant of a real square idempotent matrix $A$? Prove your answer.
+
+b) If a homogeneous system of linear equations over $\mathbb{R}$ has more variables than equations, then the system has infinitely many solutions.
+
+c) Let $V$ be a vector space over a field $\mathbb{F}$. Let $c$ be an element of $\mathbb{F}$ and let $\mathbf{v}$ be an element
+of $V$. Suppose that $c\mathbf{v} = 0$. Use the defining properties of a vector space to show that either $c = 0$ or $\mathbf{v} = \mathbf{0}$.
+
+
+\newpage
+\vskip.15in
+
+5. (25 points) Complete \textbf{all} of the following. Always, sometimes, or never? If it is always or never true, give a proof. If it is sometimes true, give an example where it’s true and where it’s false.
+
+\vskip.15in
+
+a) If matrices $A$ and $B$ are row equivalent, then the matrix $A-B$ is row equivalent to each of them.
+
+\vskip2.5in
+
+b) A matrix that commutes with a diagonal matrix is also diagonal.
+
+
+
+
+
+\vskip2.5in
+
+
+c) If two distinct subspaces of $V$ have bases $B_1$ and $B_2$, then the set $B_1 \cup B_2$ is linearly independent.
+
+\newpage
+
+\vskip.15in
+
+d) A linear transformation from $\mathbb{R}^8$ to $\mathbb{R}^5$ is onto.
+
+\vskip3.5in
+
+e) A set of three distinct vectors in a vector space $V$ forms a basis for a subspace of $V$.
+
+
+
+
+
+
+
+\newpage
+
+\vskip.3in
+6. (5 points) Show how to express the determinant of the following matrix by applying cofactor expansion once, along any row or column of your choosing. Just set up the calculation, you do not need to further evaluate it.
+
+$\begin{pmatrix}
+    a&b&c&d\\
+    e&f&g&h\\
+    i&j&k&l\\
+    m&n&o&p
+\end{pmatrix}$
+
+\vskip3in
+
+
+
+7. (6 points) Consider the function $S: \mathcal{P}_3 \to \mathcal{P}_6$ that takes each real cubic polynomial of degree at most 3 to its square (that is, to the polynomial times itself). Is this a linear transformation? Explain why or why not.
+
+
+
+\newpage
+
+8. (12 points) Complete \textbf{one} of the following:
+
+a) Compute a basis for each of the four fundamental subspaces of the real matrix $\begin{pmatrix}
+    1&5&2\\
+    0&0&1
+\end{pmatrix}$.
+
+b) Show that vector space $(\mathbb{Z}/3\mathbb{Z})^3$ has exactly 28 subspaces.
+
+
+
+
+
+
+\newpage
+9. (6 points) Complete one of the following.
+
+a) Give a basis for $\mathbb{R}^3$ where the vector $\begin{pmatrix}
+    1\\3\\-2
+\end{pmatrix}$ in the standard basis would instead be given the name $\begin{pmatrix}
+    4\\2\\4
+\end{pmatrix}$; or explain why this is not possible.
+
+b) Compute the dimension of the smallest subspace of $M_{2 \times 2}^\mathbb{R}$ containing all of its invertible matrices.
+
+
+\newpage
+
+
+\vskip.5in
+
+\textbf{Bonus:} Explain one or more linear algebra ideas or results that you've learned in the course so far but that haven't been asked about on this exam.
+\end{document}

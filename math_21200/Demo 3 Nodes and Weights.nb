@@ -1,0 +1,407 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.3' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     15844,        399]
+NotebookOptionsPosition[     15128,        378]
+NotebookOutlinePosition[     15528,        394]
+CellTagsIndexPosition[     15485,        391]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Function", " ", "to", " ", "visualize", " ", "Gauss"}], "-", 
+    RowBox[{"Legendre", " ", "Nodes", " ", "and", " ", "Weights", " ", 
+     RowBox[{"on", "[", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", "1"}], "]"}]}]}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"VisualizeGaussLegendre", "[", "n_Integer", "]"}], ":=", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "raw", ",", "nodes01", ",", "weights01", ",", "nodes", ",", "weights", 
+        ",", "data"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", 
+       RowBox[{"1.", " ", "Get", " ", "raw", " ", "data", " ", 
+        RowBox[{"(", 
+         RowBox[{"Defaults", " ", "to", " ", 
+          RowBox[{"interval", "[", 
+           RowBox[{"0", ",", "1"}], "]"}]}], ")"}]}], "*)"}], 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"raw", "[", 
+          RowBox[{"[", "1", "]"}], "]"}], " ", "are", " ", "nodes"}], ",", 
+        RowBox[{
+         RowBox[{"raw", "[", 
+          RowBox[{"[", "2", "]"}], "]"}], " ", "are", " ", "weights"}]}], 
+       "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"raw", "=", 
+        RowBox[{"NIntegrate`GaussRuleData", "[", 
+         RowBox[{"n", ",", "MachinePrecision"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"nodes01", "=", 
+        RowBox[{"raw", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"weights01", "=", 
+        RowBox[{"raw", "[", 
+         RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"2.", " ", "Rescale", " ", 
+         RowBox[{"from", "[", 
+          RowBox[{"0", ",", "1"}], "]"}], " ", 
+         RowBox[{"to", "[", 
+          RowBox[{
+           RowBox[{"-", "1"}], ",", "1"}], "]"}]}], "*)"}], 
+       RowBox[{"nodes", "=", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"2", "*", "nodes01"}], ")"}], "-", "1"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"weights", "=", 
+        RowBox[{"2", "*", "weights01"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "3.", " ", "Pair", " ", "them", " ", "up", " ", "for", " ", 
+         "plotting"}], "*)"}], 
+       RowBox[{"data", "=", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{"{", 
+          RowBox[{"nodes", ",", "weights"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"4.", " ", "Create", " ", "the", " ", "plot"}], "*)"}], 
+       RowBox[{"ListPlot", "[", 
+        RowBox[{"data", ",", 
+         RowBox[{"Filling", "->", "Axis"}], ",", 
+         RowBox[{"PlotStyle", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"PointSize", "[", "0.02", "]"}], ",", "Red"}], "}"}]}], ",", 
+         RowBox[{"FillingStyle", "->", "Blue"}], ",", 
+         RowBox[{"PlotRange", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "1.1"}], ",", "1.1"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{
+               RowBox[{"Max", "[", "weights", "]"}], "*", "1.1"}]}], "}"}]}], 
+           "}"}]}], ",", 
+         RowBox[{"Frame", "->", "True"}], ",", 
+         RowBox[{"FrameLabel", "->", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Node Position (x)\>\"", ",", "\"\<Weight (w)\>\""}], 
+           "}"}]}], ",", 
+         RowBox[{"GridLines", "->", "Automatic"}], ",", 
+         RowBox[{"PlotLabel", "->", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"\"\<Gauss-Legendre Quadrature (n = \>\"", "<>", 
+             RowBox[{"ToString", "[", "n", "]"}], "<>", "\"\<)\>\""}], ",", 
+            "16", ",", "Bold"}], "]"}]}], ",", 
+         RowBox[{"Epilog", "->", 
+          RowBox[{"{", 
+           RowBox[{"Dashed", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"1", ",", "0"}], "}"}]}], "}"}], "]"}]}], " ", 
+           RowBox[{"(*", 
+            RowBox[{"Emphasize", " ", "the", " ", "interval"}], "*)"}], 
+           "}"}]}]}], "]"}]}]}], "]"}]}], "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Interactive", " ", "Manipulate"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"VisualizeGaussLegendre", "[", "n", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"n", ",", "10", ",", "\"\<Number of Nodes (n)\>\""}], "}"}], ",",
+        "2", ",", "50", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.980117782375326*^9, 3.9801178174186516`*^9}},
+ CellLabel->"In[55]:=",ExpressionUUID->"e66a8663-d20b-9f41-a695-6d940c153e7f"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 6, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 10, "Number of Nodes (n)"}, 2, 50, 1, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    360., {122.74678979715273`, 128.47872339090273`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 10}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> $CellContext`VisualizeGaussLegendre[$CellContext`n$$], 
+      "Specifications" :> {{{$CellContext`n$$, 10, "Number of Nodes (n)"}, 2, 
+         50, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{402.6, {165.60762964090273`, 171.33956323465273`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.980117783572632*^9, 3.980117837273657*^9},
+ CellLabel->"Out[56]=",ExpressionUUID->"df7f974f-8e93-8046-a725-19ff0bb0c842"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Function", " ", "to", " ", "visualize", " ", "Gauss"}], "-", 
+    RowBox[{"Chebyshev", " ", "Nodes", " ", "and", " ", "Weights", " ", 
+     RowBox[{"on", "[", 
+      RowBox[{
+       RowBox[{"-", "1"}], ",", "1"}], "]"}]}]}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"VisualizeGaussChebyshev", "[", "n_Integer", "]"}], ":=", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"nodes", ",", "weights", ",", "data", ",", "k"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "1.", " ", "Analytic", " ", "formulas", " ", "for", " ", "Nodes", " ", 
+        "and", " ", "Weights"}], "*)"}], 
+      RowBox[{"(*", 
+       RowBox[{"Nodes", " ", "lie", " ", 
+        RowBox[{"on", "[", 
+         RowBox[{
+          RowBox[{"-", "1"}], ",", "1"}], "]"}], " ", "automatically", " ", 
+        "via", " ", "Cosine"}], "*)"}], 
+      RowBox[{
+       RowBox[{"nodes", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Cos", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"2", "*", "k"}], "-", "1"}], ")"}], "/", 
+             RowBox[{"(", 
+              RowBox[{"2", "*", "n"}], ")"}]}], "*", "Pi"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Weights", " ", "are", " ", "uniform", " ", "for", " ", "Chebyshev", " ",
+          "First", " ", "Kind"}], "*)"}], 
+       RowBox[{"weights", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Pi", "/", "n"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{
+        "2.", " ", "Pair", " ", "them", " ", "up", " ", "for", " ", 
+         "plotting"}], "*)"}], 
+       RowBox[{"data", "=", 
+        RowBox[{"Transpose", "[", 
+         RowBox[{"{", 
+          RowBox[{"nodes", ",", "weights"}], "}"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", 
+        RowBox[{"3.", " ", "Create", " ", "the", " ", "plot"}], "*)"}], 
+       RowBox[{"ListPlot", "[", 
+        RowBox[{"data", ",", 
+         RowBox[{"Filling", "->", "Axis"}], ",", 
+         RowBox[{"PlotStyle", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"PointSize", "[", "0.02", "]"}], ",", 
+            RowBox[{"Darker", "[", "Green", "]"}]}], "}"}]}], ",", 
+         RowBox[{"(*", 
+          RowBox[{
+          "Green", " ", "to", " ", "distinguish", " ", "from", " ", 
+           "Legendre"}], "*)"}], 
+         RowBox[{"FillingStyle", "->", 
+          RowBox[{"Opacity", "[", 
+           RowBox[{"0.5", ",", "Green"}], "]"}]}], ",", 
+         RowBox[{"PlotRange", "->", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "1.1"}], ",", "1.1"}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"0", ",", 
+              RowBox[{
+               RowBox[{"Max", "[", "weights", "]"}], "*", "1.5"}]}], "}"}]}], 
+           "}"}]}], ",", 
+         RowBox[{"Frame", "->", "True"}], ",", 
+         RowBox[{"FrameLabel", "->", 
+          RowBox[{"{", 
+           RowBox[{"\"\<Node Position (x)\>\"", ",", "\"\<Weight (w)\>\""}], 
+           "}"}]}], ",", 
+         RowBox[{"GridLines", "->", "Automatic"}], ",", 
+         RowBox[{"PlotLabel", "->", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+            RowBox[{"\"\<Gauss-Chebyshev Quadrature (n = \>\"", "<>", 
+             RowBox[{"ToString", "[", "n", "]"}], "<>", "\"\<)\>\""}], ",", 
+            "16", ",", "Bold"}], "]"}]}], ",", 
+         RowBox[{"Epilog", "->", 
+          RowBox[{"{", 
+           RowBox[{"Dashed", ",", 
+            RowBox[{"Line", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"-", "1"}], ",", "0"}], "}"}], ",", 
+               RowBox[{"{", 
+                RowBox[{"1", ",", "0"}], "}"}]}], "}"}], "]"}], ",", 
+            RowBox[{"(*", 
+             RowBox[{
+             "Add", " ", "a", " ", "text", " ", "label", " ", "showing", " ", 
+              "the", " ", "uniform", " ", "weight", " ", "value"}], "*)"}], 
+            RowBox[{"Text", "[", 
+             RowBox[{
+              RowBox[{"Style", "[", 
+               RowBox[{
+                RowBox[{"\"\<Weights = \[Pi]/\>\"", "<>", 
+                 RowBox[{"ToString", "[", "n", "]"}]}], ",", "12", ",", 
+                RowBox[{"Darker", "[", "Green", "]"}]}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"0", ",", 
+                RowBox[{
+                 RowBox[{"Max", "[", "weights", "]"}], "*", "1.2"}]}], 
+               "}"}]}], "]"}]}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+   "\[IndentingNewLine]", "\n", 
+   RowBox[{"(*", 
+    RowBox[{"Interactive", " ", "Manipulate"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", 
+    RowBox[{
+     RowBox[{"VisualizeGaussChebyshev", "[", "n", "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"n", ",", "10", ",", "\"\<Number of Nodes (n)\>\""}], "}"}], ",",
+        "2", ",", "50", ",", "1", ",", 
+       RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.9801178826966133`*^9, 3.9801178826966133`*^9}},
+ CellLabel->"In[57]:=",ExpressionUUID->"14270d34-de0b-a24f-b970-30ec1c140e2c"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`n$$ = 9, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`n$$], 10, "Number of Nodes (n)"}, 2, 50, 1, 
+      ControlType -> Manipulator}}, Typeset`size$$ = {
+    360., {122.74678979715273`, 128.47872339090273`}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {$CellContext`n$$ = 10}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, 
+      "Body" :> $CellContext`VisualizeGaussChebyshev[$CellContext`n$$], 
+      "Specifications" :> {{{$CellContext`n$$, 10, "Number of Nodes (n)"}, 2, 
+         50, 1, Appearance -> "Labeled"}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{402.6, {165.60762964090273`, 171.33956323465273`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.980117884521818*^9},
+ CellLabel->"Out[58]=",ExpressionUUID->"5f19b9c3-82d7-794c-a1ac-ec1a64045133"]
+}, Open  ]]
+},
+WindowSize->{846.5, 709},
+WindowMargins->{{259, Automatic}, {70, Automatic}},
+FrontEndVersion->"14.3 for Microsoft Windows (64-bit) (July 8, 2025)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"615afb4a-18de-cb45-a3e6-c451316d8102"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 5062, 128, 370, "Input",ExpressionUUID->"e66a8663-d20b-9f41-a695-6d940c153e7f"],
+Cell[5641, 152, 1932, 37, 353, "Output",ExpressionUUID->"df7f974f-8e93-8046-a725-19ff0bb0c842"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7610, 194, 5588, 142, 332, "Input",ExpressionUUID->"14270d34-de0b-a24f-b970-30ec1c140e2c"],
+Cell[13201, 338, 1911, 37, 372, "Output",ExpressionUUID->"5f19b9c3-82d7-794c-a1ac-ec1a64045133"]
+}, Open  ]]
+}
+]
+*)
+

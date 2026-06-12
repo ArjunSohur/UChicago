@@ -1,0 +1,240 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8680,        232]
+NotebookOptionsPosition[      8207,        215]
+NotebookOutlinePosition[      8599,        231]
+CellTagsIndexPosition[      8556,        228]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Show", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"ParametricPlot3D", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Cos", "[", 
+             RowBox[{"2", "t"}], "]"}], " ", 
+            RowBox[{"(", 
+             RowBox[{"2", "+", 
+              RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], ",", 
+           RowBox[{
+            RowBox[{"Sin", "[", 
+             RowBox[{
+              RowBox[{"-", "2"}], "t"}], "]"}], " ", 
+            RowBox[{"(", 
+             RowBox[{"2", "+", 
+              RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], ",", 
+           RowBox[{"Sin", "[", "\[IndentingNewLine]", "t", "]"}]}], "}"}], 
+         ",", 
+         RowBox[{"{", 
+          RowBox[{"t", ",", 
+           RowBox[{
+            RowBox[{"-", ".01"}], "+", 
+            RowBox[{"2", 
+             RowBox[{"Pi", "/", "5"}]}]}], ",", 
+           RowBox[{
+            RowBox[{"2", 
+             RowBox[{"Pi", "/", "5"}]}], "+", "w"}]}], "}"}], ",", 
+         RowBox[{"PlotStyle", "\[Rule]", "Green"}], ",", 
+         RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+         RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+         RowBox[{"Axes", "\[Rule]", "False"}]}], "]"}], "/.", 
+       RowBox[{
+        RowBox[{"Line", "[", 
+         RowBox[{"pts_", ",", "rest___"}], "]"}], "\[RuleDelayed]", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Arrow", "[", 
+         RowBox[{"Tube", "[", 
+          RowBox[{"pts", ",", "0.1", ",", "rest"}], "]"}], "]"}]}]}], ",", 
+      RowBox[{"ParametricPlot3D", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Cos", "[", "t", "]"}], " ", 
+             RowBox[{"(", 
+              RowBox[{"2", "+", 
+               RowBox[{"Cos", "[", "u", "]"}]}], ")"}]}], ",", 
+            RowBox[{
+             RowBox[{"Sin", "[", "t", "]"}], " ", 
+             RowBox[{"(", 
+              RowBox[{"2", "+", 
+               RowBox[{"Cos", "[", "u", "]"}]}], ")"}]}], ",", 
+            RowBox[{"Sin", "[", "u", "]"}]}], "}"}], ",", 
+          RowBox[{"Tube", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"Cos", "[", 
+              RowBox[{"2", "t"}], "]"}], " ", 
+             RowBox[{"(", 
+              RowBox[{"2", "+", 
+               RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], ",", 
+            RowBox[{
+             RowBox[{"Sin", "[", 
+              RowBox[{"2", "t"}], "]"}], " ", 
+             RowBox[{"(", 
+              RowBox[{"2", "+", 
+               RowBox[{"Cos", "[", "t", "]"}]}], ")"}]}], ",", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"-", "t"}], "]"}]}], "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "0", ",", 
+          RowBox[{"2", " ", "Pi"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"u", ",", "0", ",", 
+          RowBox[{"2", " ", "Pi"}]}], "}"}], ",", 
+        RowBox[{"Mesh", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"0.01", ",", 
+             RowBox[{"2", 
+              RowBox[{"Pi", "/", "5"}]}], ",", 
+             RowBox[{"4", " ", 
+              RowBox[{"Pi", "/", "5"}]}], ",", 
+             RowBox[{"6", 
+              RowBox[{"Pi", "/", "5"}]}], ",", 
+             RowBox[{"8", 
+              RowBox[{"Pi", "/", "5"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"0.01", ",", 
+             RowBox[{"2", 
+              RowBox[{"Pi", "/", "5"}]}], ",", 
+             RowBox[{"4", " ", 
+              RowBox[{"Pi", "/", "5"}]}], ",", 
+             RowBox[{"6", 
+              RowBox[{"Pi", "/", "5"}]}], ",", 
+             RowBox[{"8", 
+              RowBox[{"Pi", "/", "5"}]}]}], "}"}]}], "}"}]}], ",", 
+        RowBox[{"PlotStyle", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Opacity", "[", "o", "]"}], ",", 
+           RowBox[{"Directive", "[", 
+            RowBox[{"Green", ",", 
+             RowBox[{"Thickness", "[", ".3", "]"}]}], "]"}]}], "}"}]}], ",", 
+        RowBox[{"Boxed", "\[Rule]", "False"}], ",", 
+        RowBox[{"Axes", "\[Rule]", "False"}]}], "]"}]}], "}"}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"w", ",", "0", ",", 
+     RowBox[{"2", "Pi"}], ",", 
+     RowBox[{"2", 
+      RowBox[{"Pi", "/", "5"}]}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"o", ",", "0", ",", "1", ",", ".2"}], "}"}]}], "]"}]], "Input",
+ CellLabel->
+  "In[127]:=",ExpressionUUID->"c45f1919-ba5e-4c96-b1be-c5a32d586453"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`o$$ = 0.4, $CellContext`w$$ = 0, 
+    Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`w$$], 0, 2 Pi, Rational[2, 5] Pi}, {
+      Hold[$CellContext`o$$], 0, 1, 0.2}}, Typeset`size$$ = {
+    360., {178., 182.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`o$$ = 0, $CellContext`w$$ = 0}, 
+      "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Show[{
+         ReplaceAll[
+          
+          ParametricPlot3D[{
+           Cos[2 $CellContext`t] (2 + Cos[$CellContext`t]), 
+            Sin[(-2) $CellContext`t] (2 + Cos[$CellContext`t]), 
+            Sin[$CellContext`t]}, {$CellContext`t, -0.01 + 2 (Pi/5), 
+            2 (Pi/5) + $CellContext`w$$}, PlotStyle -> Green, PlotRange -> 
+           All, Boxed -> False, Axes -> False], Line[
+            Pattern[$CellContext`pts, 
+             Blank[]], 
+            Pattern[$CellContext`rest, 
+             BlankNullSequence[]]] :> Arrow[
+            Tube[$CellContext`pts, 0.1, $CellContext`rest]]], 
+         ParametricPlot3D[{{
+           Cos[$CellContext`t] (2 + Cos[$CellContext`u]), 
+            Sin[$CellContext`t] (2 + Cos[$CellContext`u]), 
+            Sin[$CellContext`u]}, 
+           Tube[
+           Cos[2 $CellContext`t] (2 + Cos[$CellContext`t]), 
+            Sin[2 $CellContext`t] (2 + Cos[$CellContext`t]), 
+            Sin[-$CellContext`t]]}, {$CellContext`t, 0, 2 
+           Pi}, {$CellContext`u, 0, 2 Pi}, 
+          Mesh -> {{0.01, 2 (Pi/5), 4 (Pi/5), 6 (Pi/5), 8 (Pi/5)}, {
+            0.01, 2 (Pi/5), 4 (Pi/5), 6 (Pi/5), 8 (Pi/5)}}, PlotStyle -> {
+            Opacity[$CellContext`o$$], 
+            Directive[Green, 
+             Thickness[0.3]]}, Boxed -> False, Axes -> False]}], 
+      "Specifications" :> {{$CellContext`w$$, 0, 2 Pi, Rational[2, 5] 
+         Pi}, {$CellContext`o$$, 0, 1, 0.2}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{405., {237., 243.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.8424307168701353`*^9},
+ CellLabel->
+  "Out[127]=",ExpressionUUID->"97b4c3e4-2be1-4da4-839e-e21641b14256"]
+}, {2}]]
+},
+WindowSize->{808, 697},
+WindowMargins->{{87, Automatic}, {Automatic, 9}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"85f26c4e-fd39-432d-90f8-5b88ed6a4d8c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 4595, 125, 220, "Input",ExpressionUUID->"c45f1919-ba5e-4c96-b1be-c5a32d586453"],
+Cell[5178, 149, 3016, 63, 499, "Output",ExpressionUUID->"97b4c3e4-2be1-4da4-839e-e21641b14256"]
+}, {2}]]
+}
+]
+*)
+

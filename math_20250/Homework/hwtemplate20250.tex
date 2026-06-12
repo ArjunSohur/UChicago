@@ -1,0 +1,136 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.05in}
+
+%%%%SYMBOL&DEFINITIONS%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\ZF}{\Z/5\Z}
+\newcommand{\ZP}{\Z/p\Z}
+\newcommand{\vv}{{\bf v}}
+\newcommand{\ww}{{\bf w}}
+\newcommand{\zv}{{\bf 0}}
+\DeclareMathOperator{\Span}{span}
+
+
+%%%%%%%HEADER%%%%%%%%%%%
+\pagestyle{fancyplain}
+\headheight 35pt
+\lhead{MATH 20250\\Prof. Lanier}
+%%%%%%%%%%%%%%%%%%%%%%%%
+\chead{\textbf{\Large Solutions, HW1}}
+\rhead{ YOUR NAME}
+\headsep 1.5em
+%%%%%DOCUMENT%BODY%%%%%%%%
+\begin{document}
+
+Here are some fields: $\F$, $\R$, $\C$, $\Q$, $\ZF$, $\ZP$.
+
+For a custom letter in ``blackboard bold": $\mathbb{P}$
+
+%%%If you put percent signs in front of what you type, it's just a "comment" and doesn't show up in the compiled pdf. Also, notice that for math symbols and expressions you have to surround them with dollar signs.
+
+Here are some vector spaces: $V$, $W$, $\R^2$, $\C^n$, $M_{3 \times 3}^{\R}$
+
+Some symbols for vectors, in bold: $\vv$, $\ww$, $\zv$, or for a vector with your choice of letter: ${\bf q}$
+
+Here are some important symbols: $\cdot$ $\times$ $\rightarrow$ $\{$ $\}$ $\cup$ $\cap$ $\Span$ %%not \span
+$\dim$ $\det$ $\pi$ $\lambda$ $\in$ $\subset$ $\sum_{i=1}^n$ 
+
+You can make a nice displayed equation; some things (like sums) are less cramped this way:
+
+\[
+\sum_{i=1}^k a_i\vv_i=0
+\]
+
+Here is a vector:
+$\begin{pmatrix}
+2\\
+3\\
+\end{pmatrix}$
+
+And a linear combination:
+$\begin{pmatrix}
+2\\
+3\\
+\end{pmatrix}
++
+\begin{pmatrix}
+3\\
+4\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+5\\
+7\\
+\end{pmatrix}$
+
+Now with subscripts!
+
+$a_1\vv_1+a_2\vv_2+\dots+a_k\vv_k=0$
+
+For subscripts and superscripts that are longer that one character, you need to surround them with braces: $a_{j,k}$. But if they're just one character long, the braces aren't needed (but they don't hurt, either).\\ %%those double backslashes end a line and leave a little vertical space after it. For a bigger vertical space...
+
+Here's a half inch vertical skip:
+
+\vskip.5in
+
+Here is a matrix:
+$\begin{pmatrix}
+1 & 0\\
+0 & 1\\
+\end{pmatrix}$
+
+Here are an inverse and a transpose:
+
+$\begin{pmatrix}
+1 & 1\\
+0 & 1\\
+\end{pmatrix}^{-1}
+=
+\begin{pmatrix}
+1 & -1\\
+0 & 1\\
+\end{pmatrix}
+$
+
+\vskip.2in
+
+$\begin{pmatrix}
+1 & 2 & 3\\
+4 & 5 & 6\\
+\end{pmatrix}^{T}
+=
+\begin{pmatrix}
+1 & 4\\
+2 & 5\\
+3 & 6\\
+\end{pmatrix}$
+
+
+
+
+How about nicely aligned system of equations?
+\begin{align*}
+x+2y+3z=0\\
+x+3y+4z=0
+\end{align*}
+
+
+
+\end{document}

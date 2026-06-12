@@ -1,0 +1,252 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8989,        244]
+NotebookOptionsPosition[      8514,        227]
+NotebookOutlinePosition[      8908,        243]
+CellTagsIndexPosition[      8865,        240]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{"Panel", "[", 
+  RowBox[{"DynamicModule", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"a1", "=", "1"}], ",", 
+      RowBox[{"b1", "=", "0"}], ",", 
+      RowBox[{"c1", "=", "1"}], ",", 
+      RowBox[{"d1", "=", "1"}]}], "}"}], ",", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Grid", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "a1", "]"}], ",", "Number"}], "]"}], 
+            ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "c1", "]"}], ",", "Number"}], "]"}]}], 
+           "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "b1", "]"}], ",", "Number"}], "]"}], 
+            ",", 
+            RowBox[{"InputField", "[", 
+             RowBox[{
+              RowBox[{"Dynamic", "[", "d1", "]"}], ",", "Number"}], "]"}]}], 
+           "}"}]}], "}"}], "]"}], ",", 
+       RowBox[{"Dynamic", "[", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"A", "=", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"a1", ",", "c1"}], "}"}], ",", 
+             RowBox[{"{", 
+              RowBox[{"b1", ",", "d1"}], "}"}]}], "}"}]}], ";", 
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Graphics", "[", 
+              RowBox[{
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Hue", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ArcTan", "[", 
+                    RowBox[{"j", "/", 
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", ".001"}], ")"}]}], "]"}], "/", "Pi"}], 
+                    ",", "1", ",", "1"}], "]"}], ",", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", "i", "}"}], ",", 
+                    RowBox[{"{", "j", "}"}]}], "}"}], "]"}]}], "}"}], "]"}]}],
+                   "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", 
+                   RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"j", ",", 
+                   RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+               RowBox[{"Background", "\[Rule]", "White"}], ",", 
+               RowBox[{"ImageSize", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+               RowBox[{"PlotRange", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "}"}]}]}], "]"}],
+              ",", 
+             RowBox[{"Graphics", "[", 
+              RowBox[{
+               RowBox[{"Table", "[", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                   RowBox[{"Hue", "[", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"ArcTan", "[", 
+                    RowBox[{"j", "/", 
+                    RowBox[{"(", 
+                    RowBox[{"i", "+", ".001"}], ")"}]}], "]"}], "/", "Pi"}], 
+                    ",", "1", ",", "1"}], "]"}], ",", 
+                   RowBox[{"Arrow", "[", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0"}], "}"}], ",", 
+                    RowBox[{"Flatten", "[", 
+                    RowBox[{"A", ".", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"{", "i", "}"}], ",", 
+                    RowBox[{"{", "j", "}"}]}], "}"}]}], "]"}]}], "}"}], 
+                    "]"}]}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", 
+                   RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"j", ",", 
+                   RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "]"}], ",", 
+               RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+               RowBox[{"Background", "\[Rule]", "White"}], ",", 
+               RowBox[{"ImageSize", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{"400", ",", "400"}], "}"}]}], ",", 
+               RowBox[{"PlotRange", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "5"}], ",", "5"}], "}"}], ",", 
+                  RowBox[{"{", 
+                   RowBox[{
+                    RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "}"}]}]}], 
+              "]"}]}], "}"}], "]"}]}], ")"}], "]"}]}], "}"}], "]"}]}], "]"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.842447978420897*^9, 3.842448012659054*^9}, {
+  3.8424480517449617`*^9, 3.842448059492551*^9}, {3.842448098410013*^9, 
+  3.842448115531127*^9}},
+ CellLabel->
+  "In[222]:=",ExpressionUUID->"950c8c78-8e36-4af3-92e1-0cbfab77d7db"],
+
+Cell[BoxData[
+ PanelBox[
+  DynamicModuleBox[{$CellContext`a1$$ = 1, $CellContext`b1$$ = 
+   0, $CellContext`c1$$ = 1, $CellContext`d1$$ = 1}, 
+   TagBox[GridBox[{
+      {
+       TagBox[GridBox[{
+          {
+           InputFieldBox[Dynamic[$CellContext`a1$$], Number], 
+           InputFieldBox[Dynamic[$CellContext`c1$$], Number]},
+          {
+           InputFieldBox[Dynamic[$CellContext`b1$$], Number], 
+           InputFieldBox[Dynamic[$CellContext`d1$$], Number]}
+         },
+         AutoDelete->False,
+         GridBoxItemSize->{
+          "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+        "Grid"]},
+      {
+       DynamicBox[
+        ToBoxes[$CellContext`A = {{$CellContext`a1$$, $CellContext`c1$$}, \
+{$CellContext`b1$$, $CellContext`d1$$}}; Row[{
+            Graphics[
+             Table[{
+               Hue[ArcTan[$CellContext`j/($CellContext`i + 0.001)]/Pi, 1, 1], 
+               
+               Arrow[{{0, 0}, 
+                 
+                 Flatten[{{$CellContext`i}, {$CellContext`j}}]}]}, \
+{$CellContext`i, -5, 5}, {$CellContext`j, -5, 5}], Axes -> True, Background -> 
+             White, ImageSize -> {400, 400}, PlotRange -> {{-5, 5}, {-5, 5}}], 
+            Graphics[
+             Table[{
+               Hue[ArcTan[$CellContext`j/($CellContext`i + 0.001)]/Pi, 1, 1], 
+               
+               Arrow[{{0, 0}, 
+                 Flatten[
+                  
+                  Dot[$CellContext`A, {{$CellContext`i}, \
+{$CellContext`j}}]]}]}, {$CellContext`i, -5, 5}, {$CellContext`j, -5, 5}], 
+             Axes -> True, Background -> White, ImageSize -> {400, 400}, 
+             PlotRange -> {{-5, 5}, {-5, 5}}]}], StandardForm],
+        ImageSizeCache->{800., {198., 202.}}]}
+     },
+     DefaultBaseStyle->"Column",
+     GridBoxAlignment->{"Columns" -> {{Left}}},
+     GridBoxItemSize->{"Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+    "Column"],
+   DynamicModuleValues:>{}]]], "Output",
+ CellChangeTimes->{
+  3.84244801395221*^9, 3.84244806125945*^9, {3.842448101121644*^9, 
+   3.842448116483795*^9}, 3.8424482234677277`*^9},
+ CellLabel->
+  "Out[222]=",ExpressionUUID->"810d6bbd-17f2-4871-8627-a4aa51ed437c"]
+}, {2}]]
+},
+WindowSize->{1221, 697},
+WindowMargins->{{43, Automatic}, {Automatic, 48}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"30edb9af-d86a-40c3-b201-74d207ab9339"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 5753, 147, 178, "Input",ExpressionUUID->"950c8c78-8e36-4af3-92e1-0cbfab77d7db"],
+Cell[6336, 171, 2165, 53, 512, "Output",ExpressionUUID->"810d6bbd-17f2-4871-8627-a4aa51ed437c"]
+}, {2}]]
+}
+]
+*)
+

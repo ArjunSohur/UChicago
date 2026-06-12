@@ -1,0 +1,163 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5914,        155]
+NotebookOptionsPosition[      5350,        137]
+NotebookOutlinePosition[      5743,        153]
+CellTagsIndexPosition[      5700,        150]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"u", "=", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"4", "x"}], "]"}]}], ";", 
+  RowBox[{"v", "=", 
+   RowBox[{
+    RowBox[{"x", "^", "3"}], "-", 
+    RowBox[{"x", "^", "2"}], "+", 
+    RowBox[{"x", "/", "2"}]}]}], ";", 
+  RowBox[{"w", "=", 
+   RowBox[{
+    RowBox[{"Sin", "[", 
+     RowBox[{"15", " ", 
+      RowBox[{"x", "^", "2"}]}], "]"}], "+", 
+    RowBox[{"x", "/", "2"}]}]}], ";", 
+  RowBox[{"Manipulate", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"i", " ", "u"}], "+", 
+       RowBox[{"j", " ", "v"}], "+", 
+       RowBox[{"k", " ", "w"}]}], " ", ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1"}], "}"}], ",", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"-", "5"}], ",", "5"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", 
+      RowBox[{"-", "2"}], ",", "2", ",", 
+      RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"j", ",", 
+      RowBox[{"-", "2"}], ",", "2", ",", 
+      RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"k", ",", 
+      RowBox[{"-", "2"}], ",", "2", ",", 
+      RowBox[{"Appearance", "\[Rule]", "\"\<Labeled\>\""}]}], "}"}], ",", 
+    RowBox[{"SaveDefinitions", "\[Rule]", "True"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.842448977664102*^9, 3.8424490079257727`*^9}, {
+  3.8424492279197693`*^9, 3.842449285543351*^9}, {3.8424493224594517`*^9, 
+  3.84244934400851*^9}},
+ CellLabel->
+  "In[229]:=",ExpressionUUID->"6ff95a5e-bc2b-4169-9696-6b14f973d8b8"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`i$$ = 1., $CellContext`j$$ = 
+    0., $CellContext`k$$ = 0., Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`i$$], -2, 2}, {
+      Hold[$CellContext`j$$], -2, 2}, {
+      Hold[$CellContext`k$$], -2, 2}}, Typeset`size$$ = {360., {103., 107.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = False}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`i$$ = -2, $CellContext`j$$ = -2, \
+$CellContext`k$$ = -2}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> 
+      Plot[$CellContext`i$$ $CellContext`u + $CellContext`j$$ $CellContext`v + \
+$CellContext`k$$ $CellContext`w, {$CellContext`x, 0, 1}, 
+        PlotRange -> {{0, 1}, {-5, 5}}], 
+      "Specifications" :> {{$CellContext`i$$, -2, 2, Appearance -> 
+         "Labeled"}, {$CellContext`j$$, -2, 2, Appearance -> 
+         "Labeled"}, {$CellContext`k$$, -2, 2, Appearance -> "Labeled"}}, 
+      "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{405., {176., 182.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    Initialization:>({$CellContext`u = 
+       Sin[4 $CellContext`x], $CellContext`v = $CellContext`x/
+         2 - $CellContext`x^2 + $CellContext`x^3, $CellContext`w = \
+$CellContext`x/2 + Sin[15 $CellContext`x^2]}; Typeset`initDone$$ = True),
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{
+  3.841717288264801*^9, {3.8424489190625668`*^9, 3.842448921595998*^9}, {
+   3.8424489990718517`*^9, 3.8424490085888844`*^9}, {3.842449242675523*^9, 
+   3.842449287243703*^9}, {3.8424493347367783`*^9, 3.842449344670887*^9}},
+ CellLabel->
+  "Out[229]=",ExpressionUUID->"5a5f2bcb-e33f-47ad-bfb0-6720f491f26e"]
+}, {2}]],
+
+Cell["\<\
+This applet shows linear combinations of three vectors {u,v,w} in the vector \
+space C[0,1], which consists of the continuous real functions on the interval \
+[0,1]. The scalars in the linear combination iu+jv+kw are i, j, and k. They \
+lie in the field R and can be varied using the sliders.\
+\>", "Text",
+ CellChangeTimes->{{3.8424486554794083`*^9, 3.842448830415403*^9}, {
+  3.842448876023294*^9, 
+  3.842448916727746*^9}},ExpressionUUID->"11b42a03-3b99-4455-940b-\
+86a0b06c5223"]
+},
+WindowSize->{808, 697},
+WindowMargins->{{234, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"0df53dc5-e87a-4a00-854b-b911ee1b3148"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1778, 51, 136, "Input",ExpressionUUID->"6ff95a5e-bc2b-4169-9696-6b14f973d8b8"],
+Cell[2361, 75, 2480, 48, 377, "Output",ExpressionUUID->"5a5f2bcb-e33f-47ad-bfb0-6720f491f26e"]
+}, {2}]],
+Cell[4853, 126, 493, 9, 81, "Text",ExpressionUUID->"11b42a03-3b99-4455-940b-86a0b06c5223"]
+}
+]
+*)
+
